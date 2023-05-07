@@ -47,34 +47,59 @@
     <br>
     <p>Uploaded pictures</p>
     <script type="module">
-      import {getStorage, getDownloadURL, ref} from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-storage.js';
+      import {getStorage, getDownloadURL, ref, listAll} from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-storage.js';
 
       //const storage = getStorage(bucketUrl="gs://colorizephotos-385720-new");
       const storage = getStorage();
-      getDownloadURL(ref(storage, 'gs://colorizephotos-385720-new/1683460885498-image.jpg'))
-        .then((url) => {
-         // `url` is the download URL for 'images/stars.jpg'
+      const bucketPath = 'gs://colorizephotos-385720-new';
+      // get list of all photos
 
-      // This can be downloaded directly:
-      const xhr = new XMLHttpRequest();
-      xhr.responseType = 'blob';
-      xhr.onload = (event) => {
-        const blob = xhr.response;
-      };
-      xhr.open('GET', url);
-      xhr.send();
+      // Create a reference under which you want to list
+      const listRef = ref(storage, bucketPath);
 
-      console.log(url);
+      // Find all the prefixes and items.
+      listAll(listRef)
+        .then((res) => {
+          res.prefixes.forEach((folderRef) => {
+            // All the prefixes under listRef.
+            // You may call listAll() recursively on them.
+          });
+          const imagesOriginalStoragePointers = res.items.filter((itemRef) => {
+            const filename = itemRef._location["path"];
+            return !filename.startsWith("deoldified")
+          })
+          const body = document.body;
+          const tbl = document.createElement('table');
+          body.appendChild(tbl);
+          imagesOriginalStoragePointers.forEach((itemRef) => {
+            const urlOrig = "gs://".concat(itemRef._location["bucket"]).concat("/").concat(itemRef._location["path"]);
+            const urlDeoldified = "gs://".concat(itemRef._location["bucket"]).concat("/").concat("deoldified_"
+              ).concat(itemRef._location["path"]);
+            const tr = tbl.insertRow();
+            const tdOrig = tr.insertCell();
+            td.style.width="50"
+            const tdDeold = tr.insertCell();
+            getDownloadURL(ref(storage, urlOrig)).then((url) => {
+              let img = tdOrig.appendChild(document.createElement("img"));
+              img.src = url;
+              img.style.width="50%";
 
-      // Or inserted into an <img> element
-      const img = document.getElementById('myimg');
-      img.setAttribute('src', url);
-    })
-    .catch((error) => {
-      // Handle any errors
-    });
+            }).catch((error) => {
+              // Handle any errors
+            });
+            getDownloadURL(ref(storage, urlDeoldified)).then((url) => {
+              let img = tdDeold.appendChild(document.createElement("img"));
+              img.src = url;
+              img.style.width="50%";
+            }).catch((error) => {
+              // Handle any errors
+            });
+          });
+        }).catch((error) => {
+          // Uh-oh, an error occurred!
+        });
     </script>
-    <img id="myimg" alt="An image from storage">
+<!--    <img id="myimg" alt="An image from storage" width="20%">-->
     <p id="load">Firebase SDK Loading&hellip;</p>
 
     <script>
