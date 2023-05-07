@@ -38,14 +38,24 @@
         body { border-top: 16px solid #ffa100; }
       }
     </style>
+    <style>
+        .myDiv {
+            margin-left: 5%;
+            text-align: left;
+        }
+    </style>
   </head>
   <body>
-    <div style="position:absolute;left:50%;width:50%;margin-left: -25%;" >
+    <div style="position:absolute; left:50%; width:50%; margin-left: -15%; top:5px" >
         <input type="file" id="photo" accept="image/jpeg"/>
         <button id="upload" onclick="uploadImage()">Upload Image</button>
     </div>
-    <br>
-    <p>Uploaded pictures</p>
+    <br><br>
+    <div style="position:absolute; left:50%; width:50%;margin-left: -5%;" >
+        <button onClick="window.location.reload();">Refresh Page</button>
+    </div>
+    <br><br>
+    <h2 align="center">Uploaded pictures</h2>
     <script type="module">
       import {getStorage, getDownloadURL, ref, listAll} from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-storage.js';
 
@@ -70,6 +80,9 @@
           })
           const body = document.body;
           const tbl = document.createElement('table');
+          tbl.style.width="60%";
+          tbl.style.marginLeft="auto";
+          tbl.style.marginRight="auto";
           body.appendChild(tbl);
           imagesOriginalStoragePointers.forEach((itemRef) => {
             const urlOrig = "gs://".concat(itemRef._location["bucket"]).concat("/").concat(itemRef._location["path"]);
@@ -83,14 +96,16 @@
             getDownloadURL(ref(storage, urlOrig)).then((url) => {
               let img = tdOrig.appendChild(document.createElement("img"));
               img.src = url;
-              img.style.width="50%";
+              img.style.width="95%";
             }).catch((error) => {
               // Handle any errors
             });
+            tdOrig.style.alignContent="center";
+            tdDeold.style.alignContent="center";
             getDownloadURL(ref(storage, urlDeoldified)).then((url) => {
               let img = tdDeold.appendChild(document.createElement("img"));
               img.src = url;
-              img.style.width="50%";
+              img.style.width="95%";
               img.class="center";
 
             }).catch((error) => {
