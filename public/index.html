@@ -60,10 +60,10 @@
        };
 
        // Initialize Firebase
-       var app_bla = firebase.initializeApp(firebaseConfig);
+       firebase.initializeApp(firebaseConfig);
        console.log(firebase);
        function uploadImage() {
-          const ref = firebase.storage(app_bla).ref();
+          const ref = firebase.storage().refFromURL("gs://colorizephotos-385720-new");
           const file = document.querySelector("#photo").files[0];
           const name = +new Date() + "-" + file.name;
           const metadata = {
@@ -73,7 +73,7 @@
           .then(snapshot => snapshot.ref.getDownloadURL())
           .then(url => {
           console.log(url);
-          alert('image uploaded successfully2'+ref);
+          alert('image uploaded successfully3'+ref);
           document.querySelector("#image").src = url;
        })
        .catch(console.error);
