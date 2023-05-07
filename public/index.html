@@ -77,13 +77,13 @@
               ).concat(itemRef._location["path"]);
             const tr = tbl.insertRow();
             const tdOrig = tr.insertCell();
-            td.style.width="50"
+            tdOrig.style.width="50%";
             const tdDeold = tr.insertCell();
+            tdDeold.style.width="50%";
             getDownloadURL(ref(storage, urlOrig)).then((url) => {
               let img = tdOrig.appendChild(document.createElement("img"));
               img.src = url;
               img.style.width="50%";
-
             }).catch((error) => {
               // Handle any errors
             });
@@ -91,6 +91,8 @@
               let img = tdDeold.appendChild(document.createElement("img"));
               img.src = url;
               img.style.width="50%";
+              img.class="center";
+
             }).catch((error) => {
               // Handle any errors
             });
