@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+    <title>Test - Welcome to Firebase Hosting</title>
 
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/9.21.0/firebase-app-compat.js"></script>
@@ -39,13 +39,47 @@
     </style>
   </head>
   <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>Test - You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
+    <div>
+        <input type="file" id="photo" accept="image/jpeg"/>
+        <button id="upload" onclick="uploadImage()">Upload Image</button>
     </div>
+
     <p id="load">Firebase SDK Loading&hellip;</p>
+
+    <script>
+
+       //paste here your copied configuration code
+       const firebaseConfig = {
+           apiKey: "AIzaSyDQsgKdvCWBud-JBAHFJaVosJr9oBCWVjA",
+           authDomain: "colorizephotos-385720.firebaseapp.com",
+           projectId: "colorizephotos-385720",
+           storageBucket: "colorizephotos-385720-new",
+           messagingSenderId: "801196932289",
+           appId: "1:801196932289:web:003038dc79f5d4ee75e840",
+           measurementId: "G-J8TFWCNPRM"
+       };
+
+       // Initialize Firebase
+       var app_bla = firebase.initializeApp(firebaseConfig);
+       console.log(firebase);
+       function uploadImage() {
+          const ref = firebase.storage(app_bla).ref();
+          const file = document.querySelector("#photo").files[0];
+          const name = +new Date() + "-" + file.name;
+          const metadata = {
+             contentType: file.type
+          };
+          const task = ref.child(name).put(file, metadata);task
+          .then(snapshot => snapshot.ref.getDownloadURL())
+          .then(url => {
+          console.log(url);
+          alert('image uploaded successfully2'+ref);
+          document.querySelector("#image").src = url;
+       })
+       .catch(console.error);
+       }
+       const errorMsgElement = document.querySelector('span#errorMsg');
+    </script>
 
     <script>
       document.addEventListener('DOMContentLoaded', function() {
