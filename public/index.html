@@ -17,6 +17,7 @@
     <script defer src="/__/firebase/9.21.0/firebase-analytics-compat.js"></script>
     <script defer src="/__/firebase/9.21.0/firebase-remote-config-compat.js"></script>
     <script defer src="/__/firebase/9.21.0/firebase-performance-compat.js"></script>
+    <script type="module" src="app.js"></script>
     <!-- 
       initialize the SDK after all desired features are loaded, set useEmulator to false
       to avoid connecting the SDK to running emulators.
@@ -105,7 +106,6 @@
        }
        const errorMsgElement = document.querySelector('span#errorMsg');
     </script>
-
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const loadEl = document.querySelector('#load');
