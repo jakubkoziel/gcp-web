@@ -46,33 +46,33 @@
     </div>
     <br>
     <p>Uploaded pictures</p>
-<!--    <script type="module">-->
-<!--      import {getStorage, getDownloadURL, ref} from "firebase/storage";-->
+    <script type="module">
+      import {getStorage, getDownloadURL, ref} from "firebase/storage";
 
-<!--      const storage = getStorage(bucketUrl="gs://colorizephotos-385720-new");-->
-<!--      getDownloadURL(ref(storage, '1683460885498-image.jpg'))-->
-<!--        .then((url) => {-->
-<!--         // `url` is the download URL for 'images/stars.jpg'-->
+      const storage = getStorage(bucketUrl="gs://colorizephotos-385720-new");
+      getDownloadURL(ref(storage, 'gs://colorizephotos-385720-new/1683460885498-image.jpg'))
+        .then((url) => {
+         // `url` is the download URL for 'images/stars.jpg'
 
-<!--      // This can be downloaded directly:-->
-<!--      const xhr = new XMLHttpRequest();-->
-<!--      xhr.responseType = 'blob';-->
-<!--      xhr.onload = (event) => {-->
-<!--        const blob = xhr.response;-->
-<!--      };-->
-<!--      xhr.open('GET', url);-->
-<!--      xhr.send();-->
+      // This can be downloaded directly:
+      const xhr = new XMLHttpRequest();
+      xhr.responseType = 'blob';
+      xhr.onload = (event) => {
+        const blob = xhr.response;
+      };
+      xhr.open('GET', url);
+      xhr.send();
 
-<!--      console.log(url);-->
+      console.log(url);
 
-<!--      // Or inserted into an <img> element-->
-<!--      const img = document.getElementById('myimg');-->
-<!--      img.setAttribute('src', url);-->
-<!--    })-->
-<!--    .catch((error) => {-->
-<!--      // Handle any errors-->
-<!--    });-->
-<!--    </script>-->
+      // Or inserted into an <img> element
+      const img = document.getElementById('myimg');
+      img.setAttribute('src', url);
+    })
+    .catch((error) => {
+      // Handle any errors
+    });
+    </script>
     <img id="myimg" alt="An image from storage">
     <p id="load">Firebase SDK Loading&hellip;</p>
 
