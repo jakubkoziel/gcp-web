@@ -47,7 +47,7 @@
     <br>
     <p>Uploaded pictures</p>
     <script type="module">
-      import {getStorage, getDownloadURL, ref} from "firebase/storage";
+      import {getStorage, getDownloadURL, ref} from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-storage.js';
 
       const storage = getStorage(bucketUrl="gs://colorizephotos-385720-new");
       getDownloadURL(ref(storage, 'gs://colorizephotos-385720-new/1683460885498-image.jpg'))
