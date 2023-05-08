@@ -61,7 +61,9 @@
 
       //const storage = getStorage(bucketUrl="gs://colorizephotos-385720-new");
       const storage = getStorage();
-      const bucketPath = 'gs://colorizephotos-385720-new';
+      // const bucketPath = 'gs://colorizephotos-385720-new';
+      const bucketPath = 'gs://colorizephotos-385720-cheaper';
+
       // get list of all photos
 
       // Create a reference under which you want to list
@@ -126,7 +128,7 @@
            apiKey: "AIzaSyDQsgKdvCWBud-JBAHFJaVosJr9oBCWVjA",
            authDomain: "colorizephotos-385720.firebaseapp.com",
            projectId: "colorizephotos-385720",
-           storageBucket: "colorizephotos-385720-new",
+           storageBucket: "colorizephotos-385720-cheaper",
            messagingSenderId: "801196932289",
            appId: "1:801196932289:web:003038dc79f5d4ee75e840",
            measurementId: "G-J8TFWCNPRM"
@@ -136,7 +138,7 @@
        firebase.initializeApp(firebaseConfig);
        console.log(firebase);
        function uploadImage() {
-          const ref = firebase.storage().refFromURL("gs://colorizephotos-385720-new");
+          const ref = firebase.storage().refFromURL("gs://colorizephotos-385720-cheaper");
           const file = document.querySelector("#photo").files[0];
           const name = +new Date() + "-" + file.name;
           const metadata = {
